@@ -1,10 +1,11 @@
 
 const initialState = {
-  product: [{ id: 101, name: 'Car', img: './assets/car.png' },
-    { id: 102, name: 'Bike', img: './assets/bike.png' },
-    { id: 103, name: 'Television', img: './assets/tv.png' },
-    { id: 104, name: 'Refrigerator', img: './assets/fridge.png' },
-  ],
+//   product: [{ id: 101, name: 'Car', img: './assets/car.png' },
+//     { id: 102, name: 'Bike', img: './assets/bike.png' },
+//     { id: 103, name: 'Television', img: './assets/tv.png' },
+//     { id: 104, name: 'Refrigerator', img: './assets/fridge.png' },
+//   ],
+  product: [],
   cart: [],
   totalQuantity: 0,
   status: {
@@ -14,8 +15,8 @@ const initialState = {
   },
 };
 const reducer = (state = initialState, action) => {
-  let { cart, totalQuantity } = state;
-  const { product, status } = state;
+  let { cart, product, totalQuantity } = state;
+  const { status } = state;
   const { type, value } = action;
   let index;
   const newStatus = {
@@ -65,7 +66,7 @@ const reducer = (state = initialState, action) => {
         status: { ...newStatus },
       };
     case 'CHECK':
-      if (cart[value] && cart[value].checked) {
+      if (cart[value].checked) {
         cart[value].checked = false;
       } else {
         cart[value].checked = true;
@@ -81,7 +82,11 @@ const reducer = (state = initialState, action) => {
         return !item.checked;
       });
       return { ...state, cart, totalQuantity };
-    default: return { ...state };
+    case 'GET':
+      product = value;
+      return { ...state, product };
+    default:
+      return state;
   }
 };
 

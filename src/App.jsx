@@ -1,7 +1,8 @@
-import React, { } from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import axios from 'axios';
 import PropTypes from 'prop-types';
 import ProductPage from './ProductPage';
 import CartPage from './CartPage';
@@ -10,8 +11,12 @@ import NavBar from './AppBar';
 const App = (props) => {
   const {
     addData, sortData, status, product,
-    totalQuantity, removeData, cart, handle, deleteArray,
+    totalQuantity, removeData, cart, handle, deleteArray, getData,
   } = props;
+  useEffect(() => {
+    const url = '/products';
+    axios.get(url).then(response => getData(response.data));
+  }, []);
   return (
     <Router>
       <div>
@@ -56,6 +61,7 @@ const mapStateToProps = state => ({
   markedArray: state.markedArray,
 });
 const mapDispatchToProps = dispatch => ({
+  getData: value => dispatch({ type: 'GET', value }),
   addData: (e, item) => dispatch({ type: 'ADD', value: item }),
   removeData: (e, index) => dispatch({ type: 'REMOVE', value: index }),
   sortData: (e, value) => dispatch({ type: 'SORT', value }),
@@ -72,5 +78,6 @@ App.propTypes = {
   totalQuantity: PropTypes.number.isRequired,
   product: PropTypes.arrayOf(PropTypes.object).isRequired,
   cart: PropTypes.arrayOf(PropTypes.object).isRequired,
+  getData: PropTypes.func.isRequired,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(App);
