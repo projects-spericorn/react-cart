@@ -1,16 +1,16 @@
 import React from 'react';
 import './App.css';
 
-export const CartPage = (props) => {
-    const { name, quantity } = props.status
+const CartPage = (props) => {
+    const { name, quantity } = props.status;
     return (
         <div>
             {
-                props.cart.length ?
-                <>
-                    <table className="table">
-                        <thead>
-                            <tr><th></th>
+               props.cart.length 
+                ? <>
+                  <table className="table">
+                    <thead>
+                      <tr><th></th>
                                 <th>Product ID</th>
                                 <th>Product Name<button
                                     onClick={e => props.sort(e, 'name')}
@@ -55,3 +55,4 @@ export const CartPage = (props) => {
         </div>
     )
 }
+export default CartPage;

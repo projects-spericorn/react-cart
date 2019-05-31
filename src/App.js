@@ -1,13 +1,15 @@
 import React, { } from 'react';
-import './App.css'
+import './App.css';
+import { connect } from 'react-redux';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { ProductPage } from './ProductPage';
-import { CartPage } from './CartPage'
+import  CartPage  from './CartPage';
 import { NavBar } from './AppBar';
-import { connect } from 'react-redux'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
 
-const App = props => {
-    const { addData, sortData, status, product,
+
+const App = (props) => {
+    const {
+         addData, sortData, status, product,
           totalQuantity, removeData, cart,handle,deleteArray } = props
     return (
         <Router>
@@ -38,8 +40,8 @@ const App = props => {
                     )} />
             </div>
         </Router>
-    )
-}
+    );
+};
 const mapStateToProps = (state) => {
     return {
         product: state.product,
