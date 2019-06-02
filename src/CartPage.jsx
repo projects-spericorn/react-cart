@@ -95,7 +95,6 @@ const CartPage = (props) => {
   );
 };
 CartPage.propTypes = {
-  status: PropTypes.arrayOf(PropTypes.object).isRequired,
   cart: PropTypes.arrayOf(PropTypes.object).isRequired,
   sort: PropTypes.func.isRequired,
   handleCheck: PropTypes.func.isRequired,

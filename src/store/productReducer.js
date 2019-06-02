@@ -1,11 +1,10 @@
 
 const initialState = {
-//   product: [{ id: 101, name: 'Car', img: './assets/car.png' },
-//     { id: 102, name: 'Bike', img: './assets/bike.png' },
-//     { id: 103, name: 'Television', img: './assets/tv.png' },
-//     { id: 104, name: 'Refrigerator', img: './assets/fridge.png' },
-//   ],
-  product: [],
+  product: [{ id: 101, name: 'Car', img: './assets/car.png' },
+    { id: 102, name: 'Bike', img: './assets/bike.png' },
+    { id: 103, name: 'Television', img: './assets/tv.png' },
+    { id: 104, name: 'Refrigerator', img: './assets/fridge.png' },
+  ],
   cart: [],
   totalQuantity: 0,
   status: {
@@ -25,6 +24,7 @@ const reducer = (state = initialState, action) => {
     quantity: '',
   };
   const sortColumn = (column, item) => {
+    console.log('status[item]', status[item])
     if (status[item] === '↓') {
       column.sort((a, b) => {
         if (a[item] < b[item]) return 1;
@@ -52,6 +52,7 @@ const reducer = (state = initialState, action) => {
       cart = cart.filter(item => item.quantity !== 0);
       return { ...state, cart, totalQuantity };
     case 'SORT':
+      console.log('product', product)
       newStatus[value] = status[value] === '↓'
             || status[value] === '' ? '↑' : '↓';
       if (value === 'product') {
@@ -82,9 +83,6 @@ const reducer = (state = initialState, action) => {
         return !item.checked;
       });
       return { ...state, cart, totalQuantity };
-    case 'GET':
-      product = value;
-      return { ...state, product };
     default:
       return state;
   }

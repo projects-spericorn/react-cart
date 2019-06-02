@@ -51,7 +51,6 @@ const ProductPage = (props) => {
   );
 };
 ProductPage.propTypes = {
-  status: PropTypes.arrayOf(PropTypes.object).isRequired,
   sort: PropTypes.func.isRequired,
   product: PropTypes.arrayOf(PropTypes.object).isRequired,
   click: PropTypes.func.isRequired,
